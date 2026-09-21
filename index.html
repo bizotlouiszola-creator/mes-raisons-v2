@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e0f12">
+<link rel="manifest" href="manifest.json">
+<title>Mes raisons</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0e0f12;
+  --bg-2:#141619;
+  --ink:#f2f0ec;
+  --ink-soft:#a5a49f;
+  --ink-faint:#6b6a67;
+  --accent:#e8674c;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.16);
+  --radius:14px;
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f4f0;
+    --bg-2:#ffffff;
+    --ink:#16171a;
+    --ink-soft:#5c5b57;
+    --ink-faint:#9a9894;
+    --accent:#d0492e;
+    --line:rgba(0,0,0,.09);
+    --line-strong:rgba(0,0,0,.16);
+  }
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(900px 500px at 50% -10%, rgba(232,103,76,.12), transparent 70%),
+    var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  justify-content:center;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+.wrap{
+  width:100%;
+  max-width:620px;
+  padding:52px 20px 70px;
+}
+
+/* ---------- en-tête ---------- */
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:.7rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  border:1px solid var(--line);
+  border-radius:99px;
+  padding:6px 13px;
+  margin:0 0 20px;
+}
+
+.eyebrow::before{
+  content:"";
+  width:5px;height:5px;border-radius:50%;
+  background:var(--accent);
+}
+
+h1{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-weight:400;
+  font-size:clamp(2rem,7vw,2.9rem);
+  line-height:1.15;
+  letter-spacing:-.015em;
+  margin:0 0 18px;
+}
+
+h1 em{
+  font-style:italic;
+  color:var(--accent);
+}
+
+.confession{
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+  max-width:46ch;
+  margin:0 0 26px;
+}
+
+/* ---------- bouton notif ---------- */
+
+.notif-row{display:flex;margin:0 0 30px}
+
+.notif-btn{
+  font:inherit;
+  font-size:.83rem;
+  color:var(--ink-soft);
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:99px;
+  padding:9px 16px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  transition:border-color .2s,color .2s,transform .12s;
+}
+.notif-btn:hover:not(:disabled){border-color:var(--line-strong);color:var(--ink)}
+.notif-btn:active:not(:disabled){transform:scale(.97)}
+.notif-btn:disabled{cursor:default;color:var(--ink-faint)}
+
+.notif-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--ink-faint);flex:none;
+}
+.notif-btn.on .notif-dot{
+  background:var(--accent);
+  box-shadow:0 0 0 0 rgba(232,103,76,.55);
+  animation:pulse 2.4s infinite;
+}
+@keyframes pulse{
+  70%{box-shadow:0 0 0 7px rgba(232,103,76,0)}
+  100%{box-shadow:0 0 0 0 rgba(232,103,76,0)}
+}
+
+/* ---------- onglets ---------- */
+
+.tabs{
+  display:inline-flex;
+  gap:4px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:99px;
+  padding:4px;
+  margin:0 0 26px;
+}
+
+.tab{
+  background:none;border:0;
+  color:var(--ink-faint);
+  padding:8px 18px;
+  border-radius:99px;
+  font:inherit;font-size:.85rem;
+  cursor:pointer;
+  transition:color .2s,background .2s;
+}
+.tab.active{
+  color:var(--ink);
+  background:rgba(255,255,255,.07);
+}
+@media (prefers-color-scheme: light){
+  .tab.active{background:rgba(0,0,0,.06)}
+}
+
+.view{display:none}
+.view.active{display:block}
+
+/* ---------- carte principale ---------- */
+
+.stage{
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px 26px 28px;
+  position:relative;
+  overflow:hidden;
+}
+
+.stage::before{
+  content:"";
+  position:absolute;inset:0 0 auto 0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.5;
+}
+
+.stage-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.day-label{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:1.5rem;
+  margin:0;
+  letter-spacing:-.01em;
+}
+
+.counter{
+  font-size:.78rem;
+  color:var(--ink-faint);
+  margin:0;
+  font-variant-numeric:tabular-nums;
+}
+.counter b{color:var(--accent);font-weight:600}
+
+.progress-track{
+  width:100%;height:3px;border-radius:99px;
+  background:var(--line);
+  overflow:hidden;
+  margin:16px 0 26px;
+}
+.progress-fill{
+  height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--accent),#f0a07f);
+  transition:width .7s cubic-bezier(.22,1,.36,1);
+}
+
+.reason-card{
+  animation:rise .5s cubic-bezier(.22,1,.36,1) both;
+}
+
+.reason-card .num{
+  display:inline-block;
+  font-size:.7rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--accent);
+  border:1px solid rgba(232,103,76,.35);
+  border-radius:99px;
+  padding:4px 11px;
+  margin-bottom:16px;
+}
+
+.reason-text{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:clamp(1.35rem,4.6vw,1.7rem);
+  line-height:1.42;
+  letter-spacing:-.01em;
+  margin:0;
+}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+
+.message{
+  color:var(--ink-faint);
+  line-height:1.6;
+  margin:24px 0 0;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  font-size:.83rem;
+}
+
+/* ---------- quiz jour 1 ---------- */
+
+.locked-preview{
+  filter:blur(7px);
+  user-select:none;
+  pointer-events:none;
+  opacity:.55;
+}
+
+.quiz-intro{
+  font-size:.95rem;
+  line-height:1.6;
+  color:var(--ink-soft);
+  margin:16px 0 22px;
+}
+
+.quiz-q{
+  margin:0 0 22px;
+}
+
+.quiz-q p{
+  font-size:.9rem;
+  color:var(--ink);
+  margin:0 0 10px;
+  font-weight:500;
+}
+
+.quiz-options{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.quiz-opt{
+  font:inherit;
+  font-size:.87rem;
+  text-align:left;
+  color:var(--ink-soft);
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px 14px;
+  cursor:pointer;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.quiz-opt:hover{border-color:var(--line-strong);color:var(--ink)}
+.quiz-opt.picked{
+  border-color:var(--accent);
+  color:var(--ink);
+  background:rgba(232,103,76,.08);
+}
+
+.quiz-submit{
+  width:100%;
+  margin-top:6px;
+}
+.quiz-submit:disabled{opacity:.4;cursor:default}
+
+.quiz-verdict{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:1.15rem;
+  line-height:1.5;
+  margin:0 0 18px;
+}
+
+/* ---------- catalogue ---------- */
+
+.catalogue{display:flex;flex-direction:column;margin-top:6px}
+
+.catalog-card{
+  width:100%;
+  display:flex;align-items:center;gap:14px;
+  background:none;border:0;border-bottom:1px solid var(--line);
+  padding:14px 4px;
+  text-align:left;font:inherit;color:inherit;
+  cursor:pointer;
+  border-radius:8px;
+  transition:background .18s,padding-left .18s;
+}
+.catalog-card:hover:not(.locked){
+  background:rgba(255,255,255,.04);
+  padding-left:10px;
+}
+@media (prefers-color-scheme: light){
+  .catalog-card:hover:not(.locked){background:rgba(0,0,0,.035)}
+}
+.catalog-card.locked{cursor:default}
+
+.catalog-num{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:1.05rem;
+  color:var(--accent);
+  width:30px;flex:none;text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.catalog-card.locked .catalog-num{color:var(--ink-faint);opacity:.6}
+
+.catalog-info{min-width:0;flex:1}
+
+.catalog-title{
+  font-size:.93rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  color:var(--ink);
+}
+.catalog-card.locked .catalog-title{color:var(--ink-faint);font-style:italic}
+
+.catalog-status{
+  margin-left:auto;flex:none;
+  font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-faint);
+  border:1px solid var(--line);
+  border-radius:99px;padding:4px 10px;
+  white-space:nowrap;
+}
+.catalog-card:not(.locked) .catalog-status{color:var(--accent);border-color:rgba(232,103,76,.35)}
+
+/* ---------- modale ---------- */
+
+.modal{
+  position:fixed;inset:0;z-index:10;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal.show{display:flex;animation:fade .2s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.modal-box{
+  width:min(480px,100%);
+  background:var(--bg-2);
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  padding:28px 24px 24px;
+  animation:rise .3s cubic-bezier(.22,1,.36,1) both;
+}
+
+.modal-box h2{
+  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);
+  margin:0 0 14px;font-weight:600;
+}
+
+.modal-box p{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:1.3rem;line-height:1.45;
+  color:var(--ink);
+  margin:0;
+}
+
+.btn{
+  font:inherit;font-size:.85rem;font-weight:500;
+  color:var(--ink);
+  background:transparent;
+  border:1px solid var(--line-strong);
+  padding:10px 20px;border-radius:99px;
+  cursor:pointer;
+  transition:background .18s;
+}
+.btn:hover{background:rgba(255,255,255,.06)}
+@media (prefers-color-scheme: light){.btn:hover{background:rgba(0,0,0,.05)}}
+
+.close{margin-top:22px}
+
+@media(max-width:420px){
+  .wrap{padding:36px 16px 56px}
+  .stage{padding:24px 18px}
+  .catalog-status{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<p class="eyebrow">dossier confidentiel</p>
+
+<h1>
+Je connais toutes les raisons pour lesquelles je t'aime.<br>
+Je suis juste <em>nul</em> pour les dire à voix haute.
+</h1>
+
+<p class="confession">
+Du coup j'ai fait ça, j'espère que ça te plaira.
+Une nouvelle raison chaque jour — c'est plus lent, mais je bégaye moins.
+</p>
+
+<div class="notif-row">
+<button class="notif-btn" id="notifToggle" type="button">
+<span class="notif-dot"></span>
+<span id="notifLabel">Me rappeler à 10h</span>
+</button>
+</div>
+
+<div class="tabs">
+<button class="tab active" id="todayTab">Aujourd'hui</button>
+<button class="tab" id="catalogTab">Les archives</button>
+</div>
+
+
+<!-- PAGE DU JOUR -->
+
+<section class="view active" id="todayView">
+
+<div class="stage">
+
+<div class="stage-head">
+<p class="day-label" id="dayLabel">Jour 1</p>
+<p class="counter">
+<b id="count">0</b> / <span id="total">28</span> débloquées
+</p>
+</div>
+
+<div class="progress-track">
+<div class="progress-fill" id="fill"></div>
+</div>
+
+<div id="todayContent"></div>
+
+</div>
+
+</section>
+
+
+<!-- CATALOGUE -->
+
+<section class="view" id="catalogView">
+
+<div class="stage">
+
+<div class="stage-head">
+<p class="day-label">Les archives</p>
+<p class="counter">stockage illimité</p>
+</div>
+
+<div class="catalogue" id="catalogue"></div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- FENÊTRE POUR RELIRE UNE RAISON -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalText"></p>
+
+<button class="btn close" id="closeModal">
+Fermer
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATE DE DÉPART
+   ===================================================== */
+
+const START_DATE = "2026-09-22";
+
+
+/* =====================================================
+   TES 28 RAISONS
+   ===================================================== */
+
+const reasons = [
+
+"Parce que t'es rayonnante, solaire.",
+
+"Parce que j'adore ton rire, et qu'il me donne envie de sourire moi aussi.",
+
+"Parce que j'adore ton odeur, même quand tu transpires. Oui, même là.",
+
+"Parce que j'aime comment tu t'habilles.",
+
+"Parce que j'aime ta façon de réfléchir et le recul que tu es capable de prendre sur certaines choses.",
+
+"Parce que j'aime ta cuisine.",
+
+"Parce que j'aime ta bienveillance.",
+
+"Parce que j'aime ton côté capricieux, même si je sais que tu peux aussi être chiante.",
+
+"Parce que j'aime le fait que tu saches ce que tu veux.",
+
+"Parce que j'aime la façon dont tu t'investis dans ce qui te plaît.",
+
+"Parce que j'aime quand tu chantes, même si tu chantes faux et mal.",
+
+"Parce que je te trouve belle même quand tu fais la couillonne.",
+
+"Parce que je me sens bien avec toi.",
+
+"Parce que j'apprécie le contact physique avec toi, n'importe lequel.",
+
+"Parce que j'aime t'embrasser.",
+
+"Parce que j'aime te faire des câlins.",
+
+"Parce que j'aime toucher tes fesses.",
+
+"Parce que j'aime la chaleur de ta peau, même si ça fait un peu cucul de le dire.",
+
+"Parce que j'aime ta foi, sincère et pour de bonnes raisons.",
+
+"Parce que j'aime ton intelligence et ta façon de remettre plein de choses en question.",
+
+"Parce que j'aime que tu t'intéresses à ce qui me passionne, même quand tu n'y connais rien et que j'explique mal.",
+
+"Parce que j'aime que tu ne te laisses jamais faire, ni par tes parents, ni par personne.",
+
+"Parce que j'aime ta pudeur.",
+
+"Parce que j'aime le fait que tu saches faire plein de trucs.",
+
+"Parce que je te trouve belle même dans les moments les plus ordinaires.",
+
+"Parce que j'aime le recul que tu sais prendre sur certaines choses.",
+
+"Parce que j'aime ta façon de te faire pardonner quand tu abuses.",
+
+"Parce que je pourrais continuer à écrire des raisons pendant longtemps, parce qu'au fond c'est pas une seule chose que j'aime chez toi, c'est tout ce petit mélange qui fait que c'est toi."
+
+];
+
+
+const total = reasons.length;
+
+const QUIZ_KEY = "quizDay1Done";
+
+const quiz = [
+  {
+    question: "Mon parti politique ?",
+    options: [
+      { label: "Droite", score: 0.5 },
+      { label: "Extrême droite", score: 0 },
+      { label: "Nazi", score: 0 },
+      { label: "Apolitique", score: 1 }
+    ]
+  },
+  {
+    question: "Mon joueur préféré du moment ?",
+    options: [
+      { label: "Mbappé", score: 0 },
+      { label: "Lamine Yamal", score: 0.5 },
+      { label: "Raphinha", score: 1 },
+      { label: "Dembélé", score: 0 }
+    ]
+  },
+  {
+    question: "Mon combo plat + film préféré du moment ?",
+    options: [
+      { label: "Lasagnes + Hunger Games (trop nul 😂)", score: 0 },
+      { label: "Pizza + 365 Jours", score: 0 },
+      { label: "Burger + Star Wars", score: 1 },
+      { label: "Pâtes carbo + Toi + Moi (mdrrr)", score: 0 }
+    ]
+  }
+];
+
+let quizPicks = [null, null, null];
+
+
+/* =====================================================
+   ELEMENTS
+   ===================================================== */
+
+const todayTab = document.getElementById("todayTab");
+const catalogTab = document.getElementById("catalogTab");
+
+const todayView = document.getElementById("todayView");
+const catalogView = document.getElementById("catalogView");
+
+const todayContent = document.getElementById("todayContent");
+const catalogue = document.getElementById("catalogue");
+
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+
+document.getElementById("total").textContent = total;
+
+
+/* =====================================================
+   CALCUL DU JOUR
+   ===================================================== */
+
+function localDateOnly(date = new Date()){
+
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+
+}
+
+
+function parseDate(str){
+
+  const [year, month, day] = str.split("-").map(Number);
+
+  return new Date(year, month - 1, day);
+
+}
+
+
+function getAvailableDay(){
+
+  const start = parseDate(START_DATE);
+
+  const now = localDateOnly();
+
+  const difference =
+    Math.floor((now - start) / 86400000) + 1;
+
+  return Math.max(
+    0,
+    Math.min(total, difference)
+  );
+
+}
+
+
+/* =====================================================
+   TITRE COURT POUR LE CATALOGUE
+   ===================================================== */
+
+function getReasonTitle(text){
+
+  let clean = text
+    .replace(/^Parce que /i,"")
+    .replace(/\.$/,"");
+
+  const words = clean.split(" ");
+
+  return words
+    .slice(0, Math.min(7, words.length))
+    .join(" ")
+    + (words.length > 7 ? "…" : "");
+
+}
+
+
+/* =====================================================
+   AFFICHAGE DE LA RAISON DU JOUR
+   ===================================================== */
+
+function renderToday(){
+
+  const available = getAvailableDay();
+
+  document.getElementById("count").textContent = available;
+
+  document.getElementById("fill").style.width =
+    (available / total * 100) + "%";
+
+
+  /* AVANT LE JOUR 1 */
+
+  if(available === 0){
+
+    document.getElementById("dayLabel").textContent =
+      "Jour 0";
+
+    todayContent.innerHTML = `
+
+      <div class="reason-card">
+
+        <span class="num">
+          Ça commence demain
+        </span>
+
+        <p class="reason-text">
+          J'ai gardé la première raison bien au chaud.
+          Encore une nuit de patience.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  /* JOUR 1 : QUIZ AVANT DE DÉVERROUILLER */
+
+  if(available === 1 && localStorage.getItem(QUIZ_KEY) !== "1"){
+
+    document.getElementById("dayLabel").textContent = "Jour 1";
+
+    renderQuiz();
+
+    return;
+
+  }
+
+
+  /* RAISON DU JOUR */
+
+  const index = available - 1;
+
+  document.getElementById("dayLabel").textContent =
+    "Jour " + available;
+
+
+  todayContent.innerHTML = `
+
+    <div class="reason-card">
+
+      <span class="num">
+        Raison n° ${available}
+      </span>
+
+      <p class="reason-text">
+        ${reasons[index]}
+      </p>
+
+    </div>
+
+    ${
+      available < total
+
+      ? `
+        <p class="message">
+          Reviens demain. Il en reste ${total - available} — et non, tu ne peux pas tricher.
+        </p>
+      `
+
+      : `
+        <p class="message">
+          Voilà, plus de raisons en stock. Le problème, c'est qu'il m'en reste encore plein. Je t'aime.
+        </p>
+      `
+    }
+
+  `;
+
+}
+
+
+/* =====================================================
+   QUIZ DE DÉVERROUILLAGE (JOUR 1)
+   ===================================================== */
+
+function renderQuiz(){
+
+  const questionsHtml = quiz.map((q, qi) => `
+
+    <div class="quiz-q">
+
+      <p>${q.question}</p>
+
+      <div class="quiz-options">
+
+        ${q.options.map((opt, oi) => `
+
+          <button
+            type="button"
+            class="quiz-opt${quizPicks[qi] === oi ? " picked" : ""}"
+            data-q="${qi}"
+            data-o="${oi}"
+          >
+            ${opt.label}
+          </button>
+
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+
+  todayContent.innerHTML = `
+
+    <div class="reason-card">
+
+      <span class="num">Raison n° 1</span>
+
+      <p class="reason-text locked-preview">
+        ${reasons[0]}
+      </p>
+
+      <p class="quiz-intro">
+        Jsp si tu l'as mérité. Alors je vais te poser quelques questions.
+      </p>
+
+      ${questionsHtml}
+
+      <button class="btn quiz-submit" id="quizSubmit" disabled>
+        Valider
+      </button>
+
+    </div>
+
+  `;
+
+
+  document.querySelectorAll(".quiz-opt").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      const qi = Number(btn.dataset.q);
+      const oi = Number(btn.dataset.o);
+
+      quizPicks[qi] = oi;
+
+      document
+        .querySelectorAll(`.quiz-opt[data-q="${qi}"]`)
+        .forEach(b => b.classList.remove("picked"));
+
+      btn.classList.add("picked");
+
+      const submit = document.getElementById("quizSubmit");
+
+      submit.disabled = quizPicks.includes(null);
+
+    });
+
+  });
+
+
+  document
+    .getElementById("quizSubmit")
+    .addEventListener("click", submitQuiz);
+
+}
+
+
+function submitQuiz(){
+
+  const score = quiz.reduce(
+    (sum, q, qi) => sum + q.options[quizPicks[qi]].score,
+    0
+  );
+
+  let verdict;
+
+  if(score >= 2){
+
+    verdict = "Bravo, vas-y, tu l'as mérité.";
+
+  } else if(score >= 1){
+
+    verdict = "C'est limite, mais vas-y, tu peux voir.";
+
+  } else {
+
+    verdict = "Franchement déçu mais pas choqué. Vas-y, tu peux voir quand même. Allez, au boulot.";
+
+  }
+
+  localStorage.setItem(QUIZ_KEY, "1");
+
+  todayContent.innerHTML = `
+
+    <div class="reason-card">
+
+      <span class="num">Verdict</span>
+
+      <p class="quiz-verdict">${verdict}</p>
+
+      <button class="btn" id="revealReason">
+        Voir la raison n° 1
+      </button>
+
+    </div>
+
+  `;
+
+  document
+    .getElementById("revealReason")
+    .addEventListener("click", renderToday);
+
+}
+
+
+/* =====================================================
+   CATALOGUE
+   ===================================================== */
+
+function renderCatalogue(){
+
+  const available = getAvailableDay();
+
+  catalogue.innerHTML = "";
+
+
+  reasons.forEach((reason, index) => {
+
+    const day = index + 1;
+
+    const unlocked = day <= available;
+
+
+    const card = document.createElement("button");
+
+    card.className =
+      "catalog-card" +
+      (unlocked ? "" : " locked");
+
+    card.type = "button";
+
+
+    card.innerHTML = `
+
+      <div class="catalog-num">
+        ${String(day).padStart(2,"0")}
+      </div>
+
+      <div class="catalog-info">
+
+        <div class="catalog-title">
+          ${
+            unlocked
+              ? getReasonTitle(reason)
+              : "sous scellés"
+          }
+        </div>
+
+      </div>
+
+      <div class="catalog-status">
+        ${unlocked ? "Relire" : "Bientôt"}
+      </div>
+
+    `;
+
+
+    if(unlocked){
+
+      card.addEventListener("click", () => {
+
+        modalTitle.textContent =
+          "Jour " + day;
+
+        modalText.textContent =
+          reason;
+
+        modal.classList.add("show");
+
+      });
+
+    }
+
+
+    catalogue.appendChild(card);
+
+  });
+
+}
+
+
+/* =====================================================
+   CHANGEMENT DE PAGE
+   ===================================================== */
+
+function showView(view){
+
+  const showingToday =
+    view === "today";
+
+
+  todayTab.classList.toggle(
+    "active",
+    showingToday
+  );
+
+  catalogTab.classList.toggle(
+    "active",
+    !showingToday
+  );
+
+
+  todayView.classList.toggle(
+    "active",
+    showingToday
+  );
+
+  catalogView.classList.toggle(
+    "active",
+    !showingToday
+  );
+
+
+  if(!showingToday){
+
+    renderCatalogue();
+
+  }
+
+}
+
+
+todayTab.addEventListener(
+  "click",
+  () => showView("today")
+);
+
+
+catalogTab.addEventListener(
+  "click",
+  () => showView("catalog")
+);
+
+
+/* =====================================================
+   FERMETURE MODALE
+   ===================================================== */
+
+document
+  .getElementById("closeModal")
+  .addEventListener(
+    "click",
+    () => modal.classList.remove("show")
+  );
+
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if(event.target === modal){
+
+      modal.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+document.addEventListener("keydown", event => {
+
+  if(event.key === "Escape"){
+
+    modal.classList.remove("show");
+
+  }
+
+});
+
+
+/* =====================================================
+   NOTIFICATION QUOTIDIENNE À 10H
+   ===================================================== */
+
+const NOTIF_HOUR = 10;
+const NOTIF_KEY = "reasonsLastNotified";
+
+const notifBtn = document.getElementById("notifToggle");
+const notifLabel = document.getElementById("notifLabel");
+
+function todayKey(){
+
+  const d = localDateOnly();
+
+  return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+}
+
+function updateNotifButton(){
+
+  if(!("Notification" in window)){
+
+    notifBtn.style.display = "none";
+
+    return;
+
+  }
+
+  if(Notification.permission === "granted"){
+
+    notifLabel.textContent = "Rappel activé à 10h";
+
+    notifBtn.classList.add("on");
+
+    notifBtn.disabled = true;
+
+  } else if(Notification.permission === "denied"){
+
+    notifLabel.textContent = "Notifications bloquées";
+
+    notifBtn.disabled = true;
+
+  } else {
+
+    notifLabel.textContent = "Me rappeler à 10h";
+
+    notifBtn.disabled = false;
+
+  }
+
+}
+
+async function sendDailyNotification(){
+
+  const title = "Une raison t'attend";
+
+  const options = {
+    body: "Ta raison du jour est prête à être lue.",
+    tag: "daily-reason"
+  };
+
+  try{
+
+    if("serviceWorker" in navigator){
+
+      const reg = await navigator.serviceWorker.ready;
+
+      await reg.showNotification(title, options);
+
+    } else {
+
+      new Notification(title, options);
+
+    }
+
+    localStorage.setItem(NOTIF_KEY, todayKey());
+
+  } catch(e){
+
+    console.error("Notification impossible :", e);
+
+  }
+
+}
+
+async function sendTestNotification(){
+
+  const title = "Les notifs marchent";
+
+  const options = {
+    body: "Tu recevras une raison ici chaque jour à partir de 10h.",
+    tag: "test-reason"
+  };
+
+  try{
+
+    if("serviceWorker" in navigator){
+
+      const reg = await navigator.serviceWorker.ready;
+
+      await reg.showNotification(title, options);
+
+    } else if("Notification" in window){
+
+      new Notification(title, options);
+
+    }
+
+  } catch(e){
+
+    console.error("Notification test impossible :", e);
+
+  }
+
+}
+
+function checkAndNotify(){
+
+  if(!("Notification" in window)) return;
+
+  if(Notification.permission !== "granted") return;
+
+  const available = getAvailableDay();
+
+  if(available < 1) return;
+
+  const now = new Date();
+
+  if(now.getHours() < NOTIF_HOUR) return;
+
+  if(localStorage.getItem(NOTIF_KEY) === todayKey()) return;
+
+  sendDailyNotification();
+
+}
+
+async function tryRegisterPeriodicSync(){
+
+  if(!("serviceWorker" in navigator)) return;
+
+  try{
+
+    const reg = await navigator.serviceWorker.ready;
+
+    if(!("periodicSync" in reg)) return;
+
+    const status = await navigator.permissions.query({
+      name: "periodic-background-sync"
+    });
+
+    if(status.state === "granted"){
+
+      await reg.periodicSync.register("daily-reason", {
+        minInterval: 20 * 60 * 60 * 1000
+      });
+
+    }
+
+  } catch(e){
+
+    /* périodique non disponible sur ce navigateur, tant pis */
+
+  }
+
+}
+
+notifBtn.addEventListener("click", async () => {
+
+  if(!("Notification" in window)) return;
+
+  const permission = await Notification.requestPermission();
+
+  updateNotifButton();
+
+  if(permission === "granted"){
+
+    await sendTestNotification();
+
+    checkAndNotify();
+
+    tryRegisterPeriodicSync();
+
+  }
+
+});
+
+updateNotifButton();
+checkAndNotify();
+setInterval(checkAndNotify, 60000);
+
+
+/* =====================================================
+   INITIALISATION
+   ===================================================== */
+
+renderToday();
+renderCatalogue();
+
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("Application prête !"))
+      .catch(error => console.error("Erreur service worker :", error));
+  });
+}
+</script>
+
+</body>
+</html>

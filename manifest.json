@@ -1,0 +1,11 @@
+{
+  "name": "Mes raisons",
+  "short_name": "Mes raisons",
+  "description": "Une raison par jour pour te rappeler pourquoi je t'aime.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff8f5",
+  "theme_color": "#e8a0b5",
+  "orientation": "portrait",
+  "lang": "fr"
+}
