@@ -2,7 +2,7 @@ const CACHE_NAME = "mes-raisons-v1";
 
 const FILES_TO_CACHE = [
   "./",
-  "./index.html",
+  "./index_pwa.html",
   "./manifest.json"
 ];
 
