@@ -1,0 +1,978 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#d9486c">
+<link rel="manifest" href="manifest.json">
+<title>Mes raisons ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Caveat:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-top:#fff7f3;
+  --bg-bottom:#ffe2ec;
+  --ink:#3a1f2b;
+  --ink-soft:#6b4a58;
+  --rose:#d9486c;
+  --rose-deep:#b8305a;
+  --plum:#5c2a41;
+  --gold:#dba24a;
+  --card:#fffaf8;
+  --line:rgba(92,42,65,.12);
+}
+
+*{box-sizing:border-box}
+
+html,body{height:100%}
+
+body{
+  margin:0;
+  min-height:100%;
+  background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+  color:var(--ink);
+  font-family:'Outfit',sans-serif;
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
+}
+
+.wrap{
+  width:100%;
+  max-width:640px;
+  padding:48px 20px 70px;
+  position:relative;
+}
+
+.blob{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.35;
+  z-index:0;
+  pointer-events:none;
+}
+
+.blob.a{
+  width:280px;
+  height:280px;
+  background:#ffc9d9;
+  top:-80px;
+  left:-100px;
+}
+
+.blob.b{
+  width:320px;
+  height:320px;
+  background:#ffd9c2;
+  bottom:-120px;
+  right:-120px;
+}
+
+.content{
+  position:relative;
+  z-index:1;
+}
+
+.eyebrow{
+  font-family:'Caveat',cursive;
+  font-size:1.5rem;
+  color:var(--rose-deep);
+  text-align:center;
+  margin:0 0 6px;
+  transform:rotate(-2deg);
+}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:clamp(1.9rem,6vw,2.7rem);
+  line-height:1.2;
+  text-align:center;
+  color:var(--plum);
+  margin:0 0 18px;
+}
+
+.confession{
+  text-align:center;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--ink-soft);
+  max-width:520px;
+  margin:0 auto 28px;
+}
+
+.confession strong{
+  color:var(--rose-deep);
+  font-weight:500;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin:0 0 14px;
+}
+
+.tab{
+  flex:1;
+  border:1px solid var(--line);
+  background:rgba(255,250,248,.75);
+  color:var(--ink-soft);
+  padding:11px 8px;
+  border-radius:14px;
+  font-family:inherit;
+  font-size:.9rem;
+  cursor:pointer;
+}
+
+.tab.active{
+  background:var(--rose-deep);
+  color:#fff;
+  border-color:var(--rose-deep);
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+.stage{
+  background:var(--card);
+  border-radius:28px;
+  border:1px solid var(--line);
+  box-shadow:0 20px 50px -25px rgba(92,42,65,.35);
+  padding:30px 24px 28px;
+  text-align:center;
+}
+
+.day-label{
+  font-family:'Caveat',cursive;
+  color:var(--rose-deep);
+  font-size:1.3rem;
+  margin:0 0 5px;
+}
+
+.counter{
+  font-size:.85rem;
+  color:var(--ink-soft);
+  margin:0 0 18px;
+}
+
+.counter b{
+  color:var(--rose-deep);
+}
+
+.progress-track{
+  width:100%;
+  height:6px;
+  border-radius:99px;
+  background:#f1dfe4;
+  overflow:hidden;
+  margin:0 0 28px;
+}
+
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--rose),var(--gold));
+  width:0;
+  border-radius:99px;
+  transition:width .6s ease;
+}
+
+.reason-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:4px solid var(--rose);
+  border-radius:16px;
+  padding:22px 19px;
+  font-size:1.1rem;
+  line-height:1.6;
+  color:var(--ink);
+  animation:rise .5s ease both;
+}
+
+.reason-card .num{
+  display:block;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:var(--rose-deep);
+  font-size:1.2rem;
+  font-weight:600;
+  margin-bottom:5px;
+}
+
+@keyframes rise{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.message{
+  color:var(--ink-soft);
+  line-height:1.6;
+  margin:18px 0 0;
+  font-size:.95rem;
+}
+
+.catalogue{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.catalog-card{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  background:rgba(255,250,248,.9);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px 15px;
+  text-align:left;
+  font-family:inherit;
+  cursor:pointer;
+  color:inherit;
+}
+
+.catalog-card.locked{
+  opacity:.58;
+  cursor:default;
+}
+
+.catalog-icon{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#ffe8ef;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+}
+
+.catalog-card.locked .catalog-icon{
+  background:#f3e9ec;
+}
+
+.catalog-info{
+  min-width:0;
+}
+
+.catalog-day{
+  font-size:.78rem;
+  color:var(--rose-deep);
+  font-weight:600;
+}
+
+.catalog-title{
+  font-size:.94rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:var(--ink);
+}
+
+.catalog-status{
+  margin-left:auto;
+  font-size:.76rem;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(58,31,43,.28);
+  backdrop-filter:blur(5px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(520px,100%);
+  background:var(--card);
+  border-radius:26px;
+  padding:27px 23px;
+  box-shadow:0 25px 70px -30px rgba(58,31,43,.6);
+  text-align:center;
+}
+
+.modal-box h2{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:var(--plum);
+  font-size:1.8rem;
+  margin:0 0 13px;
+}
+
+.modal-box p{
+  line-height:1.6;
+  color:var(--ink-soft);
+  margin:0;
+}
+
+.btn{
+  font-family:'Outfit',sans-serif;
+  font-weight:500;
+  font-size:1rem;
+  color:#fff;
+  background:linear-gradient(135deg,var(--rose),var(--rose-deep));
+  border:0;
+  padding:15px 28px;
+  border-radius:99px;
+  cursor:pointer;
+  box-shadow:0 14px 30px -12px rgba(184,48,90,.55);
+  margin-top:20px;
+}
+
+.btn.secondary{
+  background:#fff;
+  color:var(--rose-deep);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+.close{
+  margin-top:20px;
+}
+
+footer{
+  text-align:center;
+  margin-top:30px;
+  font-family:'Caveat',cursive;
+  font-size:1.1rem;
+  color:var(--ink-soft);
+}
+
+.heart{
+  position:fixed;
+  pointer-events:none;
+  font-size:1.2rem;
+  z-index:20;
+  animation:float-up 1.6s ease-out forwards;
+}
+
+@keyframes float-up{
+  0%{
+    opacity:0;
+    transform:translateY(0) scale(.6);
+  }
+  15%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:translateY(-140px) scale(1.1) rotate(12deg);
+  }
+}
+
+@media(max-width:420px){
+  .wrap{
+    padding-top:35px;
+  }
+
+  .stage{
+    padding:25px 17px;
+  }
+
+  .catalog-status{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="blob a"></div>
+<div class="blob b"></div>
+
+<div class="wrap">
+<div class="content">
+
+<p class="eyebrow">pour toi</p>
+
+<h1>
+Je connais toutes les raisons pour lesquelles je t'aime.<br>
+Je suis juste nul pour les dire à voix haute.
+</h1>
+
+<p class="confession">
+Alors j'ai triché : j'ai codé un petit carnet plutôt que de bafouiller devant toi.
+<strong>Une nouvelle raison chaque jour.</strong>
+</p>
+
+<div class="tabs">
+<button class="tab active" id="todayTab">❤️ Aujourd'hui</button>
+<button class="tab" id="catalogTab">📖 Catalogue</button>
+</div>
+
+
+<!-- PAGE DU JOUR -->
+
+<section class="view active" id="todayView">
+
+<div class="stage">
+
+<p class="day-label" id="dayLabel">Jour 1</p>
+
+<p class="counter">
+<b id="count">0</b> /
+<span id="total">28</span>
+raisons débloquées
+</p>
+
+<div class="progress-track">
+<div class="progress-fill" id="fill"></div>
+</div>
+
+<div id="todayContent"></div>
+
+</div>
+
+</section>
+
+
+<!-- CATALOGUE -->
+
+<section class="view" id="catalogView">
+
+<div class="stage">
+
+<p class="day-label">Toutes mes raisons ❤️</p>
+
+<p class="message" style="margin-top:0;margin-bottom:20px">
+Les anciennes restent toujours accessibles.
+Les prochaines attendent leur jour.
+</p>
+
+<div class="catalogue" id="catalogue"></div>
+
+</div>
+
+</section>
+
+
+<footer>
+fait avec (beaucoup trop) d'amour
+</footer>
+
+</div>
+</div>
+
+
+<!-- FENÊTRE POUR RELIRE UNE RAISON -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalText"></p>
+
+<button class="btn secondary close" id="closeModal">
+Fermer
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATE DE DÉPART
+   ===================================================== */
+
+const START_DATE = "2026-09-22";
+
+
+/* =====================================================
+   TES 28 RAISONS
+   ===================================================== */
+
+const reasons = [
+
+"Parce que t'es rayonnante, solaire.",
+
+"Parce que j'adore ton rire, et qu'il me donne envie de sourire moi aussi.",
+
+"Parce que j'adore ton odeur, même quand tu transpires. Oui, même là.",
+
+"Parce que j'aime comment tu t'habilles.",
+
+"Parce que j'aime ta façon de réfléchir et le recul que tu es capable de prendre sur certaines choses.",
+
+"Parce que j'aime ta cuisine.",
+
+"Parce que j'aime ta bienveillance.",
+
+"Parce que j'aime ton côté capricieux, même si je sais que tu peux aussi être chiante.",
+
+"Parce que j'aime le fait que tu saches ce que tu veux.",
+
+"Parce que j'aime la façon dont tu t'investis dans ce qui te plaît.",
+
+"Parce que j'aime quand tu chantes, même si tu chantes faux et mal.",
+
+"Parce que je te trouve belle même quand tu fais la couillonne.",
+
+"Parce que je me sens bien avec toi.",
+
+"Parce que j'apprécie le contact physique avec toi, n'importe lequel.",
+
+"Parce que j'aime t'embrasser.",
+
+"Parce que j'aime te faire des câlins.",
+
+"Parce que j'aime toucher tes fesses.",
+
+"Parce que j'aime la chaleur de ta peau, même si ça fait un peu cucul de le dire.",
+
+"Parce que j'aime ta foi, sincère et pour de bonnes raisons.",
+
+"Parce que j'aime ton intelligence et ta façon de remettre plein de choses en question.",
+
+"Parce que j'aime que tu t'intéresses à ce qui me passionne, même quand tu n'y connais rien et que j'explique mal.",
+
+"Parce que j'aime que tu ne te laisses jamais faire, ni par tes parents, ni par personne.",
+
+"Parce que j'aime ta pudeur.",
+
+"Parce que j'aime le fait que tu saches faire plein de trucs.",
+
+"Parce que je te trouve belle même dans les moments les plus ordinaires.",
+
+"Parce que j'aime le recul que tu sais prendre sur certaines choses.",
+
+"Parce que j'aime ta façon de te faire pardonner quand tu abuses.",
+
+"Parce que je pourrais continuer à écrire des raisons pendant longtemps, parce qu'au fond c'est pas une seule chose que j'aime chez toi, c'est tout ce petit mélange qui fait que c'est toi."
+
+];
+
+
+const total = reasons.length;
+
+
+/* =====================================================
+   ELEMENTS
+   ===================================================== */
+
+const todayTab = document.getElementById("todayTab");
+const catalogTab = document.getElementById("catalogTab");
+
+const todayView = document.getElementById("todayView");
+const catalogView = document.getElementById("catalogView");
+
+const todayContent = document.getElementById("todayContent");
+const catalogue = document.getElementById("catalogue");
+
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+
+document.getElementById("total").textContent = total;
+
+
+/* =====================================================
+   CALCUL DU JOUR
+   ===================================================== */
+
+function localDateOnly(date = new Date()){
+
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+
+}
+
+
+function parseDate(str){
+
+  const [year, month, day] = str.split("-").map(Number);
+
+  return new Date(year, month - 1, day);
+
+}
+
+
+function getAvailableDay(){
+
+  const start = parseDate(START_DATE);
+
+  const now = localDateOnly();
+
+  const difference =
+    Math.floor((now - start) / 86400000) + 1;
+
+  return Math.max(
+    0,
+    Math.min(total, difference)
+  );
+
+}
+
+
+/* =====================================================
+   PETITS CŒURS
+   ===================================================== */
+
+function spawnHearts(originEl){
+
+  const rect = originEl.getBoundingClientRect();
+
+  const symbols = ["♥","✦","♡"];
+
+  for(let i = 0; i < 6; i++){
+
+    const heart = document.createElement("span");
+
+    heart.className = "heart";
+
+    heart.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    heart.style.left =
+      (
+        rect.left +
+        rect.width / 2 +
+        (Math.random() * 100 - 50)
+      ) + "px";
+
+    heart.style.top =
+      (
+        rect.top +
+        Math.random() * 15
+      ) + "px";
+
+    heart.style.color =
+      Math.random() > .5
+        ? "#d9486c"
+        : "#dba24a";
+
+    document.body.appendChild(heart);
+
+    setTimeout(
+      () => heart.remove(),
+      1700
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   TITRE COURT POUR LE CATALOGUE
+   ===================================================== */
+
+function getReasonTitle(text){
+
+  let clean = text
+    .replace(/^Parce que /i,"")
+    .replace(/\.$/,"");
+
+  const words = clean.split(" ");
+
+  return words
+    .slice(0, Math.min(7, words.length))
+    .join(" ")
+    + (words.length > 7 ? "…" : "");
+
+}
+
+
+/* =====================================================
+   AFFICHAGE DE LA RAISON DU JOUR
+   ===================================================== */
+
+function renderToday(){
+
+  const available = getAvailableDay();
+
+  document.getElementById("count").textContent = available;
+
+  document.getElementById("fill").style.width =
+    (available / total * 100) + "%";
+
+
+  /* AVANT LE JOUR 1 */
+
+  if(available === 0){
+
+    document.getElementById("dayLabel").textContent =
+      "Bientôt ❤️";
+
+    todayContent.innerHTML = `
+
+      <div class="reason-card">
+
+        <span class="num">
+          Le premier jour arrive demain
+        </span>
+
+        <div>
+          J'ai gardé la première raison pour toi.
+          Encore un tout petit peu de patience.
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  /* RAISON DU JOUR */
+
+  const index = available - 1;
+
+  document.getElementById("dayLabel").textContent =
+    "Jour " + available;
+
+
+  todayContent.innerHTML = `
+
+    <div class="reason-card">
+
+      <span class="num">
+        #${available}
+      </span>
+
+      <div>
+        ${reasons[index]}
+      </div>
+
+    </div>
+
+    ${
+      available < total
+
+      ? `
+        <p class="message">
+          Demain, une nouvelle raison t'attendra ici ❤️
+        </p>
+      `
+
+      : `
+        <p class="message">
+          Et pourtant, 28 raisons ne suffisent toujours pas.
+          Je t'aime.
+        </p>
+      `
+    }
+
+  `;
+
+}
+
+
+/* =====================================================
+   CATALOGUE
+   ===================================================== */
+
+function renderCatalogue(){
+
+  const available = getAvailableDay();
+
+  catalogue.innerHTML = "";
+
+
+  reasons.forEach((reason, index) => {
+
+    const day = index + 1;
+
+    const unlocked = day <= available;
+
+
+    const card = document.createElement("button");
+
+    card.className =
+      "catalog-card" +
+      (unlocked ? "" : " locked");
+
+    card.type = "button";
+
+
+    card.innerHTML = `
+
+      <div class="catalog-icon">
+        ${unlocked ? "❤️" : "🔒"}
+      </div>
+
+      <div class="catalog-info">
+
+        <div class="catalog-day">
+          JOUR ${day}
+        </div>
+
+        <div class="catalog-title">
+          ${
+            unlocked
+              ? getReasonTitle(reason)
+              : "Une raison à découvrir"
+          }
+        </div>
+
+      </div>
+
+      <div class="catalog-status">
+        ${unlocked ? "Relire" : "Bientôt"}
+      </div>
+
+    `;
+
+
+    if(unlocked){
+
+      card.addEventListener("click", () => {
+
+        modalTitle.textContent =
+          "Jour " + day + " ❤️";
+
+        modalText.textContent =
+          reason;
+
+        modal.classList.add("show");
+
+      });
+
+    }
+
+
+    catalogue.appendChild(card);
+
+  });
+
+}
+
+
+/* =====================================================
+   CHANGEMENT DE PAGE
+   ===================================================== */
+
+function showView(view){
+
+  const showingToday =
+    view === "today";
+
+
+  todayTab.classList.toggle(
+    "active",
+    showingToday
+  );
+
+  catalogTab.classList.toggle(
+    "active",
+    !showingToday
+  );
+
+
+  todayView.classList.toggle(
+    "active",
+    showingToday
+  );
+
+  catalogView.classList.toggle(
+    "active",
+    !showingToday
+  );
+
+
+  if(!showingToday){
+
+    renderCatalogue();
+
+  }
+
+}
+
+
+todayTab.addEventListener(
+  "click",
+  () => showView("today")
+);
+
+
+catalogTab.addEventListener(
+  "click",
+  () => showView("catalog")
+);
+
+
+/* =====================================================
+   FERMETURE MODALE
+   ===================================================== */
+
+document
+  .getElementById("closeModal")
+  .addEventListener(
+    "click",
+    () => modal.classList.remove("show")
+  );
+
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if(event.target === modal){
+
+      modal.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   INITIALISATION
+   ===================================================== */
+
+renderToday();
+renderCatalogue();
+
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("Application prête !"))
+      .catch(error => console.error("Erreur service worker :", error));
+  });
+}
+</script>
+
+</body>
+</html>
+```
